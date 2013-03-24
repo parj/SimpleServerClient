@@ -1,0 +1,20 @@
+apply plugin: 'java'
+apply plugin:'application'
+
+dependencies {
+    compile files('libs/java_websocket.jar')
+}
+
+mainClassName = "org.pm.websocket.Server"
+
+task(client, dependsOn: 'classes', type: JavaExec) {
+    main = "org.pm.websocket.Client"
+    classpath = sourceSets.main.runtimeClasspath
+    args "localhost:8887"
+}
+
+task(server, dependsOn: 'classes', type: JavaExec) {
+    main = "org.pm.websocket.Server"
+    classpath = sourceSets.main.runtimeClasspath
+    args "8887"
+}
